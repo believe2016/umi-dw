@@ -1,0 +1,27 @@
+.notification{
+  overflow: hidden;
+  &-lists{
+    li{
+      padding: 5px;
+    }
+  }
+  &--invite{
+    button{
+      margin-right: 10px;
+    }
+  }
+  &-text{
+    padding-bottom: 2px;
+  }
+  &--handled{
+    color: #999;
+  }
+  &-accept{
+    @extend %border-button-green;
+    @extend %border-button-small;
+    border-radius: 5px;
+  }
+  .ant-pagination{
+    float: right;
+  }
+}

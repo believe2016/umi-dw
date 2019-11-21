@@ -1,0 +1,89 @@
+@import "../../assets/theme/antd-colors";
+.login{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  background: #e3ffff url(../../assets/img/bg.png) no-repeat;
+  background-size: cover;
+  &__version {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+  }
+  > div{
+    flex: 1 1 auto;
+  }
+  .ant-input-group-wrapper{
+    width: 100%;
+  }
+  &-slogan {
+    position: absolute;
+    left: calc(50vw - 440px);
+    top: calc(26vw - 80px);
+    &__first {
+      font-size: 40px;
+      color: #002600;
+      letter-spacing: 4px;
+      line-height: 50px;
+    }
+    &__second {
+      font-size: 20px;
+      color: #002600;
+      letter-spacing: 1.78px;
+      line-height: 30px;
+    }
+    &__first {
+      font-size: 40px;
+      color: #002600;
+      letter-spacing: 4px;
+      line-height: 50px;
+    }
+  }
+  &-content{
+    position: relative;
+    padding: 68px 50px 44px;
+    border-radius: 4px;
+    z-index: 1;
+    width: 450px;
+    background-color: rgba(255,255,255,0.95);
+    box-shadow:0 0 10px rgba(0, 0, 0, .5);
+    margin-left: calc(80vw - 225px);
+  }
+  &-title {
+    font-size: 24px;
+    margin-bottom: 34px;
+  }
+  &-logo{
+    position: absolute;
+    top: -25px;
+    left: 200px;
+    background: url(../../assets/img/logo.png) top left no-repeat;
+    background-size: contain;
+    text-indent: -9999px;
+    text-align:center;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    margin: 0 auto;
+  }
+}
+
+.login-form-forgot {
+  text-align: right;
+  > a{
+    color: $main-text-color;
+  }
+}
+.login-form-button {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+.ant-input-group-addon {background-color: #fff;}
+.ant-form-item-with-help {margin-bottom: 24px;}

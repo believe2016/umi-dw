@@ -1,0 +1,85 @@
+.ant-btn-primary{
+  border-color: $theme-color;
+  background-color: $theme-color;
+  &:hover {
+    border-color: lighten($theme-color, 10);
+    background-color: lighten($theme-color, 10);
+  }
+}
+body{
+  .anticon {
+    font-size:16px;
+    cursor: pointer;
+  }
+  .ant-tabs-tabpane-inactive{
+    overflow: hidden;
+  }
+  .ant-tabs-ink-bar{
+    height: 3px;
+  }
+  .ant-modal{
+    padding-bottom: 0;
+  }
+  .ant-modal-header {
+    padding: 0;
+    height: 50px;
+    background-color: #f5f5f5;
+    border: 0;
+  }
+  .ant-modal-body{
+    padding: 30px;
+  }
+  .ant-modal-title,
+  .ant-modal-close-x {
+    line-height: 50px;
+    text-align: center;
+    color: #333;
+    font-size: 20px;
+  }
+  .ant-modal-close-x {
+    color: #979797;
+    font-size: 24px;
+  }
+  .ant-tabs-bar{
+    margin-bottom: 20px;
+  }
+  // 表格样式
+  .ant-table-tbody>tr,
+  .ant-table-tbody>tr>td,
+  .ant-table-thead>tr {
+    transition: all 0s;
+    text-align: center;
+  }
+  .ant-table{
+    color: rgba(0, 0, 0, 1);
+    .anticon-frown-o:before{
+      content: "\E62D";
+    }
+  }
+  .anticon-search:before{
+    color: $theme-color;
+  }
+  .ant-table-placeholder{
+    @include flex-lay(row, nowrap, center, center);
+    color:rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+  }
+  .ant-table-tbody>tr.ant-table-row-hover>td,
+  .ant-table-tbody>tr:hover>td,
+  .ant-table-thead>tr.ant-table-row-hover>td,
+  .ant-table-thead>tr:hover>td {
+    background: #fff;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: $theme-color;
+    padding: 15px 8px 16px;
+    transition: all 0s;
+  }
+  .ant-table-thead>tr>th {
+    background-color: #f8fafa;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+

@@ -1,0 +1,372 @@
+//-- Font Settings
+// $font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+$font-family: "MicrosoftYaHei", "微软雅黑", "Microsoft YaHei", Arial, sans-serif;
+
+$theme-color: #007ADA;
+$title-color: #09205D;
+//font
+$import-text-color: #000;
+$main-text-color:#333;
+$help-text-color:#999;
+
+//color
+$disabled-text-color: #ccc;
+$link-text-color: #3c868d;
+$border-color: #d8d8d8;
+$tag-bg-color: #ebebeb;
+
+//info
+$normal-info: #148de9;
+$success-info: #24b436;
+$warning-info: #fd6803;
+$error-info: #b91908;
+
+$modify-color: #108EE9;
+
+// 用户资料弹窗
+$user-height: 540px;
+
+@mixin flex-lay($direction:row, $wrap:nowrap,
+ $main:space-between, $cross:center){
+  display: flex;
+  flex-flow: $direction $wrap;
+  justify-content: $main;
+  align-items: $cross;
+}
+
+%radio-circle{
+  width: 49%;
+  border: 1px solid #d9d9d9;
+  margin-right: 2%;
+  position: relative;
+  &:last-child {
+    margin: 0;
+  }
+  .ant-radio {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -7px;
+  }
+}
+
+@mixin size($width:0px,$height:$width) {
+  width: $width;
+  height: $height;
+}
+@mixin lh($height:34px,$lineHeight:$height) {
+  height: $height;
+  line-height: $lineHeight;
+}
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}
+
+@mixin line-clamp(
+  $lines-to-show,
+  $font-size,
+  $line-height
+) {
+  display: block; // Fallback for non-webkit browsers
+  display: -webkit-box;
+  font-size: $font-size;
+  //height: ($font-size * $line-height * $lines-to-show); // Fallback for non-webkit browsers
+  line-height: $line-height;
+  height: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines-to-show;
+}
+
+%full-modal{
+  @include flex-lay(column, nowrap, flex-start, flex-start);
+  width: 85% !important;
+  height: 85vh;
+  margin: 7.5vh auto 0 auto;
+}
+
+%main-head{
+  color: $main-text-color;
+  font-size:16px;
+  font-weight: bold;
+}
+
+%box-shadow{
+  box-shadow: 1px 1px 5px 2px #eaeaea;
+}
+
+%border-btn{
+  border: 1px solid $theme-color;
+  color: $theme-color;
+  text-align: center;
+  border-radius: 2px;
+}
+
+%fill-btn{
+  background-color: $theme-color;
+  color: #fff;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+%hide-text{
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+%filter-style{
+  @include flex-lay(row, wrap, space-between, center);
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 30px;
+  padding: 0 20px;
+  font-size: 15px;
+  .btns {
+    >button {
+      display: inline-block;
+      text-align: center;
+      touch-action: manipulation;
+      cursor: pointer;
+      white-space: nowrap;
+      margin-right: 10px;
+      height: 35px;
+      line-height: 35px;
+      font-size: 15px;
+      color: $theme-color;
+      border-color: $theme-color;
+      &[disabled]{
+        color: rgba(0, 0, 0, 0.25);
+        background-color: #f7f7f7;
+        border-color: #d9d9d9;
+      }
+    }
+  }
+  .selects {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    .ant-select,
+    .ant-calendar-picker {
+      margin-right: 8px;
+    }
+    .ant-select-selection--single,
+    .ant-select-selection__rendered,
+    .ant-input, button {
+      height: 35px;
+      line-height: 35px;
+      font-size: 15px;
+    }
+    button {
+      color: $theme-color;
+      border-color: $theme-color;
+    }
+    .ant-select-selection-selected-value {
+      width: 80%;
+      height: 33px;
+      padding: 0;
+      border-right: 1px solid #d9d9d9;
+    }
+  }
+}
+
+%common__btn{
+  text-align: center;
+  button{
+    margin-right: 40px;
+    min-width: 130px;
+    height: 42px;
+    font-size: 16px;
+    @extend %border-btn;
+    border-radius: 5px;
+    &.finish{
+      margin-right: 0;
+      @extend %fill-btn;
+      border-radius: 5px;
+    }
+  }
+}
+%form__input_select--large{
+  .ant-form{
+    .ant-form-item{
+      @include flex-lay(row, nowrap, flex-start, center);
+      flex: 1 1 50%;
+      font-size: 16px;
+      margin: 0 0 20px 0;
+      input,.ant-select-selection--single,
+      .ant-select-selection__rendered,
+      .ant-select-selection-selected-value{
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+      }
+    }
+    .has-feedback{
+      display: block;
+    }
+    .has-feedback:after{
+      line-height: 40px;
+    }
+  }
+  .ant-form-item-label{
+    label{
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+  .single .ant-form-item-control-wrapper{
+    width: 100%;
+  }
+}
+
+
+// 按钮
+$border-button-gray-color: #666;
+$border-button-green-color: #0b8790;
+//$border-button-green-color: #09205D;
+$border-button-orange-color: #fc6906;
+$filled-button-gray-color: #666;
+$filled-button-green-color: #0b8790;
+$filled-button-orange-color: #fc6906;
+
+%border-button-base{
+  padding: 0 25px;
+  width: auto;
+  cursor: pointer;
+  @include lh(32px);
+  text-align: center;
+  font-size: 14px;
+  border-radius: 50px;
+  border-width: 1px;
+  border-style: solid;
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active{
+    border-color: lighten($border-button-gray-color, 20);
+    color: lighten($border-button-gray-color, 20);
+  }
+  &[disabled]{
+    border-color: lighten($border-button-gray-color, 30);
+    color: lighten($border-button-gray-color, 30);
+  }
+}
+
+%border-button-gray{
+  @extend %border-button-base;
+  border-color: $border-button-gray-color;
+  color: $border-button-gray-color;
+}
+%border-button-green{
+  @extend %border-button-base;
+  border-color: $border-button-green-color;
+  color: $border-button-green-color;
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active{
+    border-color: lighten($border-button-green-color, 8);
+    color: lighten($border-button-green-color, 8);
+  }
+  &[disabled]{
+    border-color: lighten($border-button-green-color, 11);
+    color: lighten($border-button-green-color, 11);
+  }
+}
+%border-button-orange{
+  @extend %border-button-base;
+  border-color: $border-button-orange-color;
+  color: $border-button-orange-color;
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active{
+    border-color: lighten($border-button-orange-color, 20);
+    color: lighten($border-button-orange-color, 20);
+  }
+  &[disabled]{
+    border-color: lighten($border-button-orange-color, 30);
+    color: lighten($border-button-orange-color, 30);
+  }
+}
+
+%filled-button-gray{
+  @extend %border-button-base;
+  background-color: $filled-button-gray-color;
+  border-width: 0;
+  color: #fff;
+}
+%filled-button-green{
+  @extend %filled-button-gray;
+  background-color: $filled-button-green-color;
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active{
+    background-color: lighten($filled-button-green-color, 8);
+    color: #fff;
+  }
+  &[disabled]{
+    background-color: lighten($filled-button-green-color, 11);
+    color: #fff;
+  }
+}
+%filled-button-orange{
+  @extend %filled-button-gray;
+  background-color: $filled-button-orange-color;
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active{
+    background-color: lighten($filled-button-orange-color, 10);
+    color: #fff;
+  }
+  &[disabled]{
+    background-color: lighten($filled-button-orange-color, 30);
+    color: #fff;
+  }
+}
+
+%border-button-small{
+  @extend %border-button-base;
+  @include lh(26px);
+  font-size: 12px;
+  padding: 0 20px;
+}
+%border-button-big{
+  @extend %border-button-base;
+  @include lh(50px);
+}
+
+%text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//@mixin li-style($style:none) {
+//  list-style: $style;
+//}
+//%mr5{
+//  margin-right: 5px;
+//}
+//
+//body{
+//  @extend %mr5;
+//}
