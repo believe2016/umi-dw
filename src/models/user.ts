@@ -1,5 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import { initialOrg } from '@/utils/consts';
 
 import user from '@/services/api/user';
 
@@ -7,6 +8,8 @@ export interface UserModelState {
   user: Iuser;
   institution: Iins;
   relationship: Iorg[];
+  legalRelationship: Iorg[];
+  isShowMsgHistory: boolean;
 }
 
 export interface UserModelType {
@@ -34,12 +37,14 @@ const UserModel: UserModelType = {
       id: '',
       name: '',
     },
-    relationship: []
+    relationship: [initialOrg],
+    legalRelationship: [initialOrg],
+    isShowMsgHistory: false,
   },
 
   effects: {
     *fetchCurrent({ payload }, { call, put }) {
-      // console.log('fetchCurrent', payload);
+      console.log('fetchCurrentUser', payload);
       const response = yield call(user.getUserInfo);
       yield put({
         type: 'saveCurrentUser',
@@ -50,9 +55,13 @@ const UserModel: UserModelType = {
 
   reducers: {
     saveCurrentUser(state, action) {
+      const { user, relationship } = action.payload;
+      const legalRelationship = user.status === 'NORMAL' ? relationship
+        .filter((org: Iorg) => ['CONFIRMED'].includes(org.status)) : relationship;
       return {
         ...state,
         ...action.payload,
+        legalRelationship,
       };
     },
   },

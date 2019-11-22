@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>下拉/群发历史@2x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="下拉/群发历史" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M9,18 C4.02943725,18 0,13.9705627 0,9 C0,4.02943725 4.02943725,0 9,0 C13.9705627,0 18,4.02943725 18,9 C18,13.9705627 13.9705627,18 9,18 Z M9,9 L9,4.5 C9,4.22385763 8.77614237,4 8.5,4 C8.22385763,4 8,4.22385763 8,4.5 L8,9.5 C8,9.77614237 8.22385763,10 8.5,10 L12.5,10 C12.7761424,10 13,9.77614237 13,9.5 C13,9.22385763 12.7761424,9 12.5,9 L9,9 Z" id="合并形状" fill="#333333"></path>
+    </g>
+</svg>

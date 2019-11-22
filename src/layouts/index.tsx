@@ -1,10 +1,10 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom'
 import SecurityLayout from './SecurityLayout';
-// import styles from './index.css';
+import './index.css';
 
 interface Iroute extends RouteComponentProps{
-  children: React.ReactNode
+  children: React.ReactElement
 }
 
 const logPages: string[] = ['/login', '/find_pwd'];
@@ -15,7 +15,7 @@ const BasicLayout = (props: Iroute) => {
   }
   return (
     <SecurityLayout>
-      { props.children }
+      {props.children}
     </SecurityLayout>
   );
 };

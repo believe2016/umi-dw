@@ -2,15 +2,14 @@ import path from 'path';
 import env from './env.json'; // console.log('env', env, path.resolve(__dirname, '../src/assets'))
 // console.log('process.env', process.env.NODE_ENV, process.env.APP_ENV)
 
-const oriEnv = env[process.env.APP_ENV];
-// console.log('process.env oriEnv', oriEnv);
+const oriEnv = env[process.env.APP_ENV]; // console.log('process.env oriEnv', oriEnv);
+
 const defineEnv = {};
 
 for (let key in oriEnv) {
   defineEnv[`process.env.${key}`] = oriEnv[key];
-}
-
-// console.log('process.env defineEnv', defineEnv); // ref: https://umijs.org/config/
+} // console.log('process.env defineEnv', defineEnv);
+// ref: https://umijs.org/config/
 
 const config = {
   treeShaking: true,
@@ -33,10 +32,7 @@ const config = {
           defaultTitle: '心之力医生端',
         },
         dll: true,
-        locale: {
-          enable: true,
-          default: 'zh-CN',
-        },
+        locale: false,
         targets: {
           ie: 10,
         },
@@ -79,6 +75,7 @@ const config = {
   targets: {
     ie: 10,
   },
+  history: 'hash',
 };
 export default config;
 

@@ -63,8 +63,8 @@ class FindPWD extends ComponentExt<IFindProps, IFindState> {
         }, 1000);
         this.$api.auth.getVCode({ phone: values.username })
           .then((res: IRes) => {
-            const { data, status } = res;
             console.log('res', res);
+            const { data, status } = res;
             if (status === 'success') {
               message.success('验证码已发送');
             } else {
@@ -76,7 +76,7 @@ class FindPWD extends ComponentExt<IFindProps, IFindState> {
               });
             }
           })
-          .catch((xhr: Error) => {
+          .catch((xhr: string) => {
             message.error(xhr);
           });
       }

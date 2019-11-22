@@ -1,21 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Icon, Badge,
-  Popover, message, Radio,
+  Icon, Badge, message,
+  Popover, Radio,
 } from 'antd';
-import Link from 'umi/link';
 import router from 'umi/router';
 import { connect } from 'dva';
+// @ts-ignore
+import { OPERATE_NOTIFICATION_SIZE } from '@/config';
 import { ComponentExt } from '@/utils/reactExt';
-
-import {
-  OPERATE_NOTIFICATION_SIZE,
-  FETCH_OPERATOR_NOTIFICATION_TIME,
-} from '@/config';
-import { api, setHeader } from '@/utils/api';
-import { Base64 } from 'js-base64';
-import logoutIcon from 'assets/img/nav_bar/logout.svg';
-import OperatorNotification from './OperatorNotification';
+import { setHeader } from '@/services/http';
+import OperatorNotification, {noteProps} from './OperatorNotification';
 import OperatorWorking from './OperatorWorking';
 import UserWorking from './UserWorking';
 import OrganizationsTab from './OrganizationsTab';
@@ -23,6 +17,8 @@ import Logo from './Logo';
 import DoctorQRCode from './DoctorQRCode';
 import SettingDropdown from './SettingDropdown';
 import './index.scss';
+import { ConnectState } from "@/models/connect";
+import { RadioChangeEvent } from "antd/es/radio";
 
 const RadioGroup = Radio.Group;
 let timer: any = null;
@@ -30,20 +26,31 @@ let timer: any = null;
 interface navProps {
   role: string;
   institutionId: string;
-  relationship: any;
-  organizationInfo: object;
-  uid: string;
-  user: object;
-  isAuthenticated: boolean;
-  logout: Function;
-  location: object;
-  params: object;
-  hospitalIndex: object;
-  fetchUserInfo: Function;
+  relationship: Iorg[];
+  organizationInfo: Iorg;
+  uid?: string;
+  user: Iuser;
+  curHospital: {
+    id: string;
+    name: string;
+  };
+  fetchUserInfo?: Function;
+  match: any;
+  location: any;
   roles: string[];
 }
 
-class NavBar extends ComponentExt<navProps> {
+interface navState {
+  notifications: noteProps[],
+  total: number,
+  hasUnRead: boolean,
+  current: number,
+  isSendRead: boolean,
+  organizationInfo: any,
+  currentViewRole: string,
+}
+
+class NavBar extends ComponentExt<navProps, navState> {
 
   state = {
     notifications: [],
@@ -51,7 +58,9 @@ class NavBar extends ComponentExt<navProps> {
     hasUnRead: false,
     current: 1,
     isSendRead: false,
-    organizationInfo: {},
+    organizationInfo: {
+      role: '',
+    },
     currentViewRole: '',
   };
 
@@ -62,9 +71,9 @@ class NavBar extends ComponentExt<navProps> {
     });
     const { location } = this.props;
     if (!['ROOT', 'ADMIN', 'SUB_ROOT'].includes(this.props.role)) {
-      this.fetchNotification();
-      timer = setInterval(this.fetchNotification,
-        FETCH_OPERATOR_NOTIFICATION_TIME);
+      // this.fetchNotification();
+      // timer = setInterval(this.fetchNotification,
+      //   FETCH_OPERATOR_NOTIFICATION_TIME);
     }
     if (['OPERATOR_DEPARTMENT_ADMIN'].includes(this.props.role)) {
       if (location.pathname.includes('operate/patients')) {
@@ -85,14 +94,12 @@ class NavBar extends ComponentExt<navProps> {
     clearInterval(timer);
     timer = null;
   }
-
+  //
   fetchNotification = (params = { pageAt: 0 }) => {
     if (!['ROOT', 'ADMIN', 'SUB_ROOT'].includes(this.props.role)) {
-      api.get('notification', {
-        params: {
-          pageSize: OPERATE_NOTIFICATION_SIZE,
-          ...params,
-        },
+      this.$api.notification.getNotifications({
+        pageSize: OPERATE_NOTIFICATION_SIZE,
+        ...params,
       })
         .then((res) => {
           const { notifications, total, hasUnRead } = res;
@@ -104,30 +111,28 @@ class NavBar extends ComponentExt<navProps> {
             current: params.pageAt + 1,
           });
         })
-        .catch(err => message.error(err));
+        .catch((err: string) => message.error(err));
     }
   }
+  //
+  // handleMessageRead = () => {
+  //   api.patch('notification/staff/read')
+  //     .then(() => {
+  //       this.setState({
+  //         isSendRead: true,
+  //         hasUnRead: false,
+  //       });
+  //     })
+  //     .catch(err => message.error(err));
+  // }
 
-  handleMessageRead = () => {
-    api.patch('notification/staff/read')
-      .then(() => {
-        this.setState({
-          isSendRead: true,
-          hasUnRead: false,
-        });
-      })
-      .catch(err => message.error(err));
-  }
-
-  handleToggleRole = (e) => {
+  handleToggleRole = (e: RadioChangeEvent) => {
     const { institutionId } = this.props;
-    const headerObj = JSON.stringify({
+    setHeader({
       oId: institutionId,
       uId: localStorage.getItem('user'),
       role: e.target.value,
     });
-    const ref = Base64.encode(headerObj);
-    setHeader(ref);
 
     const value = e.target.value;
     const id = localStorage.getItem('institutionId');
@@ -148,40 +153,30 @@ class NavBar extends ComponentExt<navProps> {
 
   render() {
     const {
-      notifications, current, total, organizationInfo,
-      hasUnRead, currentViewRole,
+      notifications, current, total, organizationInfo, hasUnRead, currentViewRole
     } = this.state;
     const {
-      isAuthenticated, user, logout, hospitalIndex,
-      location, relationship, institutionId, params,
-      fetchUserInfo, roles,
+      user, curHospital, roles,
+      relationship, institutionId, match,
     } = this.props;
     const doctorAssistant = roles.includes('DOCTOR') || roles.includes('ASSISTANT') || roles.includes('ADVISER');
-    const { departmentId, patientId } = params;
+    let departmentId = '';
+    let patientId = '';
+    if (match) {
+      departmentId = match.departmentId;
+      patientId = match.departmentId;
+    }
     const { role } = organizationInfo;
     const { workOrderAcceptStatus, showId } = user;
-    const { status, avatar } = user;
-    const { pathname } = location;
-    // console.log('role43', role);
-    const Logout = (
-      <div className="logout pointer" onClick={() => logout()}>
-        <img
-          src={logoutIcon}
-          alt=""
-          style={{
-            verticalAlign: 'middle',
-            marginRight: 5,
-          }}
-        />退出登录
-      </div>
-    );
-    const userLinks = status === 'NORMAL' ? (
+    const { avatar } = user;
+    const pathname = window.location.hash;
+    const userLinks = (
       <div className="header__actions">
         {/* 医生选择会诊时间 */}
         {!!doctorAssistant
           && <UserWorking
             organizationInfo={organizationInfo}
-            fetchUserInfo={fetchUserInfo}
+            // fetchUserInfo={fetchUserInfo}
             institutionId={institutionId}
           />
         }
@@ -189,7 +184,7 @@ class NavBar extends ComponentExt<navProps> {
         { ['OPERATOR'].includes(role)
           && <OperatorWorking
             workOrderAcceptStatus={workOrderAcceptStatus}
-            fetchUserInfo={fetchUserInfo}
+            // fetchUserInfo={fetchUserInfo}
             institutionId={institutionId}
           />
         }
@@ -215,7 +210,9 @@ class NavBar extends ComponentExt<navProps> {
               <Icon
                 style={{ color: '#fff', fontSize: 25, marginTop: '-12px' }}
                 type="bell"
-                onClick={hasUnRead ? this.handleMessageRead : () => {}}
+                onClick={hasUnRead ? () => {}
+                  // this.handleMessageRead
+                  : () => {}}
               />
               <span className="header__bell-text">消息</span>
             </Badge>
@@ -224,15 +221,9 @@ class NavBar extends ComponentExt<navProps> {
         {/* 下拉菜单 */}
         <SettingDropdown
           role={role}
-          logout={logout}
           avatar={avatar}
           roles={roles}
         />
-      </div>
-    ) : <div className="header__actions">{ Logout }</div>;
-    const guestLinks = (
-      <div className="header__actions">
-        <Link to="/login">登录</Link>
       </div>
     );
     const radioStyle = {
@@ -240,63 +231,66 @@ class NavBar extends ComponentExt<navProps> {
       height: '30px',
       lineHeight: '30px',
     };
-    const hidePath = ['/doctor/patient/',
-      `/institution/${params.institutionId}/department/${departmentId}/patient/${patientId}`,
-      '/doctor/reservation/patient/', '/operate/patient/'];
-    const isHide = path => hidePath.some(hide => path.includes(hide));
+    const hidePath = ['/doctor/patient/', '/doctor/reservation/patient/', '/operate/patient/'];
+    if (match && match.institutionId) {
+      hidePath.push(`/institution/${match.institutionId}/department/${departmentId}/patient/${patientId}`,)
+    }
+    const isHide = (path: string) => hidePath.some(hide => path.includes(hide));
     return isHide(pathname) ? null
-      : (<div className="header">
-        <div
-          className="header__title"
-          style={{ flex: !!doctorAssistant ? '0 0 307px' : (['OPERATOR_DEPARTMENT_ADMIN'].includes(this.props.role) ? '0 0 270px' : '0 0 170px') }}
-        >
-          {/* logo */}
-          {status === 'NORMAL' && <Logo role={role} institutionId={institutionId} hospitalIndex={hospitalIndex} />}
-          {/* 科室管理员-两个视图角色 必须用this.props.role */}
-          {
-            roles.includes('OPERATOR_DEPARTMENT_ADMIN')
-            && <RadioGroup
-              onChange={this.handleToggleRole}
-              value={currentViewRole}
-              buttonStyle={'solid'}
-              className="header__radio"
-            >
-              <Radio style={radioStyle} value={'OPERATOR_DEPARTMENT_ADMIN'}>
-                管理员视图
-              </Radio>
-              <Radio style={radioStyle} value={'OPERATOR'}>
-                护士视图
-              </Radio>
-            </RadioGroup>
-            }
+      : (
+        <div className="header">
+          <div
+            className="header__title"
+            style={{
+              flex: !!doctorAssistant ? '0 0 307px' :
+                (['OPERATOR_DEPARTMENT_ADMIN'].includes(this.props.role) ? '0 0 270px' : '0 0 170px') }}
+          >
+            {/* logo */}
+            {<Logo role={role} institutionId={institutionId} curHospital={curHospital} />}
+            {/* 科室管理员-两个视图角色 必须用this.props.role */}
+            {
+              roles.includes('OPERATOR_DEPARTMENT_ADMIN')
+              && <RadioGroup
+                onChange={this.handleToggleRole}
+                value={currentViewRole}
+                buttonStyle={'solid'}
+                className="header__radio"
+              >
+                <Radio style={radioStyle} value={'OPERATOR_DEPARTMENT_ADMIN'}>
+                  管理员视图
+                </Radio>
+                <Radio style={radioStyle} value={'OPERATOR'}>
+                  护士视图
+                </Radio>
+              </RadioGroup>
+              }
 
-          {/* 二维码 */}
-          {
-            !!doctorAssistant
-              && status === 'NORMAL' && <DoctorQRCode
-                organizationInfo={organizationInfo}
-                showId={showId}
-                relationship={relationship}
-              />
-            }
-        </div>
-        <OrganizationsTab
-          role={role}
-          relationship={relationship}
-          user={user}
-          location={location}
-          organizationInfo={organizationInfo}
-          status={status}
-          currentViewRole={currentViewRole}
-        />
-        {isAuthenticated ? userLinks : guestLinks }
-      </div>);
+            {/* 二维码 */}
+            {
+              doctorAssistant && (
+                <DoctorQRCode
+                  organizationInfo={organizationInfo}
+                  showId={showId}
+                  relationship={relationship}
+                />)
+              }
+          </div>
+          <OrganizationsTab
+            role={role || ''}
+            relationship={relationship}
+            location={location}
+            currentViewRole={currentViewRole}
+          />
+        {/*{isAuthenticated ? userLinks : guestLinks }*/}
+        {userLinks}
+      </div>
+    );
   }
 }
 
 export default connect(
-  state => ({
-    user: state.user.user,
-    // hospitalIndex: state.institution.hospitalIndex,
+  ({ user, institution }: ConnectState) => ({
+    user: user.user,
+    curHospital: institution.curHospital,
   }),
 )(NavBar);

@@ -6,7 +6,7 @@ import { extend } from 'umi-request';
 import { notification } from 'antd';
 import { Base64 } from 'js-base64';
 
-const codeMessage = {
+const codeMessage: any = {
   400: '请求参数错误',
   450:'业务处理失败',
   500: '服务异常',
@@ -68,6 +68,7 @@ const http = extend({
 });
 
 http.interceptors.request.use((url, options) => {
+  console.log('url, options', url, options);
   if (options.method === 'get') {
     return {
       url,
@@ -84,12 +85,12 @@ http.interceptors.request.use((url, options) => {
 });
 
 http.interceptors.response.use(async (response: Response) => {
-  const resData = await response.clone().json();
   const authUrl = ['user/password', 'user/verification', 'token'];
   const isWhiteList = authUrl.some(url => response.url.includes(url));
   if (isWhiteList) {
     return response;
   } else {
+    const resData = await response.clone().json();
     const { status, data } = resData;
     if (status === 'fail') {
       const msg = data.message || data.result || '请求失败';
@@ -101,9 +102,9 @@ http.interceptors.response.use(async (response: Response) => {
   }
 });
 
-export function setAuthorizationToken(token: string) {
+export function setAuthorizationToken(token: string | boolean) {
+  console.log('setAuthorizationToken token', token);
   if (token) {
-    // console.log('request', http);
     headers.Authorization = `Bearer ${token}`;
   } else {
     delete headers.Authorization;

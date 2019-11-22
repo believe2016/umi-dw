@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="14px" viewBox="0 0 12 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>删除</title>
+    <desc>Created with Sketch.</desc>
+    <g id="管理员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="医生_患者详情_调整用药" transform="translate(-1493.000000, -273.000000)" fill="#88AFFF" fill-rule="nonzero">
+            <path d="M1495,276 L1495,286 L1503,286 L1503,276 L1495,276 Z M1504,276 L1504,286 C1504,286.552285 1503.55228,287 1503,287 L1495,287 C1494.44772,287 1494,286.552285 1494,286 L1494,276 L1493,276 L1493,275 L1496,275 L1496,274 C1496,273.447715 1496.44772,273 1497,273 L1501,273 C1501.55228,273 1502,273.447715 1502,274 L1502,275 L1505,275 L1505,276 L1504,276 Z M1501,275 L1501,274 L1497,274 L1497,275 L1501,275 Z" id="删除"></path>
+        </g>
+    </g>
+</svg>

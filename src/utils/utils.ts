@@ -9,3 +9,42 @@ export const isUrl = (path: string): boolean => reg.test(path);
 
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+
+export function handleOpenedSub(id: string) {
+  // 增加
+  const OpenedSub = window.localStorage.getItem('openedSub');
+  if (OpenedSub) {
+    const formatOpenSub = new Set(OpenedSub.split(','));
+    console.log(1, formatOpenSub);
+    formatOpenSub.add(id);
+    console.log(2, formatOpenSub);
+    localStorage.setItem('openedSub', JSON.stringify([...formatOpenSub]));
+  } else {
+    localStorage.setItem('openedSub', id);
+  }
+}
+
+export function deleteOpenSub(id: string) {
+  // 删除
+  const OpenedSub = window.localStorage.getItem('openedSub');
+  if (!!OpenedSub) {
+    const formatOpenSub = new Set(OpenedSub.split(','));
+    formatOpenSub.delete(id);
+    const newSub = [...formatOpenSub];
+    localStorage.setItem('openedSub', JSON.stringify(newSub));
+  }
+}
+
+export function getOpenSub() {
+  const OpenedSub = window.localStorage.getItem('openedSub');
+  if (OpenedSub) {
+    return OpenedSub.split(',');
+  } else {
+    return [];
+  }
+}
+
+export const isOpenedSub = (id: string) => getOpenSub().includes(id);
+
+export function noop() {}

@@ -1,11 +1,14 @@
 import { AnyAction, Dispatch } from 'redux';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import { RouterTypes } from 'umi';
-import { GlobalModelState } from './global';
 import { UserModelState } from './user';
 import { AuthModelState } from './auth';
+import { WorkorderModelState } from './workorder';
+import { MessageCountState } from './messageCount';
+import { InstitutionModelState } from './institution';
 
-export { GlobalModelState, UserModelState };
+
+export { UserModelState, WorkorderModelState, MessageCountState, InstitutionModelState };
 
 export interface Loading {
   global: boolean;
@@ -20,9 +23,11 @@ export interface Loading {
 }
 
 export interface ConnectState {
-  global: GlobalModelState;
+  workorderStatus: WorkorderModelState;
+  messageCount: MessageCountState;
   user: UserModelState;
   auth: AuthModelState;
+  institution: InstitutionModelState,
 }
 
 export interface Route extends MenuDataItem {

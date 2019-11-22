@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="14px" viewBox="0 0 12 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>删除</title>
+    <desc>Created with Sketch.</desc>
+    <g id="管理员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-210.000000, -1590.000000)" fill="#007ADA" fill-rule="nonzero">
+            <path d="M212,1593 L212,1603 L220,1603 L220,1593 L212,1593 Z M221,1593 L221,1603 C221,1603.55228 220.552285,1604 220,1604 L212,1604 C211.447715,1604 211,1603.55228 211,1603 L211,1593 L210,1593 L210,1592 L213,1592 L213,1591 C213,1590.44772 213.447715,1590 214,1590 L218,1590 C218.552285,1590 219,1590.44772 219,1591 L219,1592 L222,1592 L222,1593 L221,1593 Z M218,1592 L218,1591 L214,1591 L214,1592 L218,1592 Z" id="删除"></path>
+        </g>
+    </g>
+</svg>

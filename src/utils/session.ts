@@ -9,8 +9,25 @@ export const updateSession = (res:Ires) => {
 };
 
 export const clearSession = () => {
-  localStorage.removeItem('uid');
-  localStorage.removeItem('user');
-  localStorage.removeItem('access_token');
-  localStorage.removeItem('refresh_token');
+  [
+    'access_token',
+    'refresh_token',
+    'user',
+    'role',
+    'uid',
+    'tel',
+    'relationRef',
+    'institutionId',
+    'reduxState',
+    'openedSub',
+    'activeNavInstitutionId',
+    'institutionName',
+    'accid2session',
+    'activeNavPath',
+    'QCDoctorId',
+    'onlyConsultations',
+  ]
+    .forEach((item) => {
+      localStorage.removeItem(item);
+    });
 };

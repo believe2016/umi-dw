@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>合并形状</title>
+    <desc>Created with Sketch.</desc>
+    <g id="管理员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="医生_我的预约患者_就诊请求" transform="translate(-1623.000000, -440.000000)" fill="#3FBB4C">
+            <g id="分组-3-copy-2" transform="translate(1613.000000, 431.000000)">
+                <path d="M15.3213203,15.8284271 L18.1497475,13 L18.8568542,13.7071068 L16.0284271,16.5355339 L15.3213203,17.2426407 L13.2,15.1213203 L13.9071068,14.4142136 L15.3213203,15.8284271 Z M16,20 C18.7614237,20 21,17.7614237 21,15 C21,12.2385763 18.7614237,10 16,10 C13.2385763,10 11,12.2385763 11,15 C11,17.7614237 13.2385763,20 16,20 Z M16,21 C12.6862915,21 10,18.3137085 10,15 C10,11.6862915 12.6862915,9 16,9 C19.3137085,9 22,11.6862915 22,15 C22,18.3137085 19.3137085,21 16,21 Z" id="合并形状"></path>
+            </g>
+        </g>
+    </g>
+</svg>

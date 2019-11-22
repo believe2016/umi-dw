@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>下拉/收费标准</title>
+    <desc>Created with Sketch.</desc>
+    <g id="下拉/收费标准" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#333333" cx="9" cy="9" r="9"></circle>
+        <rect id="Rectangle-13-Copy-4" fill="#FFFFFF" x="5.5" y="7" width="7" height="1" rx="0.5"></rect>
+        <rect id="Rectangle-13-Copy-5" fill="#FFFFFF" x="5.5" y="10" width="7" height="1" rx="0.5"></rect>
+        <rect id="Rectangle-13-Copy-6" fill="#FFFFFF" transform="translate(9.000000, 11.000000) rotate(-270.000000) translate(-9.000000, -11.000000) " x="5.5" y="10.5" width="7" height="1" rx="0.5"></rect>
+        <path d="M10.0784271,5.82842712 L10.0784271,3.32842712 C10.0784271,3.05228475 10.3022847,2.82842712 10.5784271,2.82842712 C10.8545695,2.82842712 11.0784271,3.05228475 11.0784271,3.32842712 L11.0784271,5.82842712 L11.0784271,6.82842712 L7.57842712,6.82842712 C7.30228475,6.82842712 7.07842712,6.6045695 7.07842712,6.32842712 C7.07842712,6.05228475 7.30228475,5.82842712 7.57842712,5.82842712 L10.0784271,5.82842712 Z" id="Combined-Shape" fill="#FFFFFF" transform="translate(9.078427, 4.828427) rotate(-315.000000) translate(-9.078427, -4.828427) "></path>
+    </g>
+</svg>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>合并形状</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="运营_检验检查" transform="translate(-126.000000, -224.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M138,247 C144.075132,247 149,242.075132 149,236 C149,229.924868 144.075132,225 138,225 C131.924868,225 127,229.924868 127,236 C127,242.075132 131.924868,247 138,247 Z M138,248 C131.372583,248 126,242.627417 126,236 C126,229.372583 131.372583,224 138,224 C144.627417,224 150,229.372583 150,236 C150,242.627417 144.627417,248 138,248 Z M143,236 L136,241 L136,231 L143,236 Z" id="合并形状"></path>
+        </g>
+    </g>
+</svg>
