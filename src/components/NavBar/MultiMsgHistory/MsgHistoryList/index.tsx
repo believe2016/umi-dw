@@ -3,6 +3,7 @@ import { ComponentExt } from '@/utils/reactExt';
 import {
   message,
 } from 'antd';
+import { IMsgInfo } from '../MsgItem';
 import { debounce } from 'lodash';
 // @ts-ignore
 import { DOCTOR_PATIENT_SIZE } from '@/config';
@@ -16,12 +17,33 @@ interface IProps {
   institutionId: string,
 }
 
-class MsgHistoryList extends ComponentExt<IProps> {
+interface IState {
+  organizationId: string | null;
+  doctorId: string | null;
+  keyword: string;
+  patientMessageApiInfos: IMsgInfo[];
+  isLoadAll: boolean;
+  pagination: {
+    pageSize: number;
+    current: number;
+    total: number;
+  },
+}
+
+class MsgHistoryList extends ComponentExt<IProps, IState> {
   state = {
     organizationId: localStorage.getItem('institutionId'),
     doctorId: localStorage.getItem('user'),
     keyword: '',
-    patientMessageApiInfos: [],
+    patientMessageApiInfos: [
+      {
+        id: '',
+        content: '',
+        images: [''],
+        patients: [],
+        createdAt: 1,
+      },
+    ],
     isLoadAll: false,
     pagination: {
       pageSize: DOCTOR_PATIENT_SIZE,
@@ -106,7 +128,7 @@ class MsgHistoryList extends ComponentExt<IProps> {
         <ul className="history__content" id="MMH_LISTS">
           {
             patientMessageApiInfos.length > 0
-              ? patientMessageApiInfos.map(info => (
+              ? patientMessageApiInfos.map((info) => (
                 <MsgItem key={info.id} info={info} hidePatient={!userId || !!institutionId} />
               ))
               : <p style={{ textAlign: 'center', fontSize: 14 }}>暂无历史数据</p>

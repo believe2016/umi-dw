@@ -17,13 +17,16 @@ const settings = {
   variableWidth: true, // 配合children的style.width,加入滑动限制
 };
 
-interface Iprops {
-  info: {
-    content: string;
-    images: string[];
-    patients: any[];
-    createdAt: number;
-  };
+export interface IMsgInfo{
+  id: string;
+  content: string;
+  images: string[];
+  patients: any[];
+  createdAt: number;
+}
+
+export interface Iprops {
+  info: IMsgInfo;
   hidePatient: boolean;
 }
 
